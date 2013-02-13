@@ -79,7 +79,8 @@ public class YambaService extends IntentService {
                 break;
 
             default:
-                throw new IllegalArgumentException("Unrecognized op: " + op);
+                Log.d(TAG, "Unrecognized op: " + op);
         }
     }
 }
+
