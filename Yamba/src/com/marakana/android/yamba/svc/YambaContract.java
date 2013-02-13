@@ -37,7 +37,6 @@ public final class YambaContract {
     public static final int SVC_OP_POLLING_ON = -9901;
     public static final int SVC_OP_POLLING_OFF = -9902;
 
-
     /** The Yamba Content Provider */
     public static final String AUTHORITY = "com.marakana.yamba.content";
 
