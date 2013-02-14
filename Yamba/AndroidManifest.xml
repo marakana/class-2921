@@ -29,9 +29,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".StatusActivity"
+            android:label="@string/yamba" >
+        </activity>
+        <activity
+            android:name=".TimelineDetailActivity"
             android:label="@string/yamba" >
         </activity>
     </application>

@@ -15,10 +15,14 @@
 */
 package com.marakana.android.yamba;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 /**
@@ -27,6 +31,15 @@ import android.view.MenuItem;
  * @author <a href="mailto:blake.meike@gmail.com">G. Blake Meike</a>
  */
 public class BaseActivity extends Activity {
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (Build.VERSION_CODES.ICE_CREAM_SANDWICH <= Build.VERSION.SDK_INT) {
+            getActionBar().setHomeButtonEnabled(true);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -49,6 +62,11 @@ public class BaseActivity extends Activity {
             startActivity(
                     new Intent(this, StatusActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+            return true;
+        }
+
+        if (R.id.menu_about == id) {
+            Toast.makeText(this, R.string.about, Toast.LENGTH_LONG).show();
             return true;
         }
 

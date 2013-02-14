@@ -15,4 +15,6 @@
     <string name="menu_timeline">Timeline</string>
     <string name="menu_about">About</string>
     
+    <string name="about">Yamba: \n\tMarko Garganta\n\tKen Jones\n\tBlake Meike</string>
+    
 </resources>
