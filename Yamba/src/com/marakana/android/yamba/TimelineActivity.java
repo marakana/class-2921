@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.marakana.android.yamba.svc.YambaContract;
+
 
 public class TimelineActivity extends BaseActivity {
     private static final String TAG = "A_STATUS";
@@ -36,6 +38,22 @@ public class TimelineActivity extends BaseActivity {
                 addFragment(state);
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent i = new Intent(YambaContract.YAMBA_SERVICE);
+        i.putExtra(YambaContract.SVC_PARAM_OP, YambaContract.SVC_OP_POLLING_ON);
+        startService(i);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Intent i = new Intent(YambaContract.YAMBA_SERVICE);
+        i.putExtra(YambaContract.SVC_PARAM_OP, YambaContract.SVC_OP_POLLING_OFF);
+        startService(i);
     }
 
     @Override

@@ -47,8 +47,6 @@ public class YambaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         if (BuildConfig.DEBUG) { Log.d(TAG, "Application up!"); }
-
-        Poller.startPolling(this);
     }
 
     /**

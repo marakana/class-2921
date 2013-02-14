@@ -78,6 +78,14 @@ public class YambaService extends IntentService {
                 new Poller((YambaApplication) getApplication()).pollStatus();
                 break;
 
+            case START_POLL:
+                Poller.startPolling(this);
+                break;
+
+            case STOP_POLL:
+                Poller.stopPolling(this);
+                break;
+
             default:
                 Log.d(TAG, "Unrecognized op: " + op);
         }
