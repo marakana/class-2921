@@ -17,6 +17,7 @@ package com.marakana.android.yamba;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,14 @@ import android.widget.TextView;
  * @author <a href="mailto:blake.meike@gmail.com">G. Blake Meike</a>
  */
 public class TimelineDetailFragment extends Fragment {
+    private static final String TAG = "DETAILS";
+
+    public static TimelineDetailFragment newInstance(Bundle state) {
+        TimelineDetailFragment instance = new TimelineDetailFragment();
+        instance.setArguments(state);
+        return instance;
+    }
+
 
     private TextView details;
     private String status;
@@ -40,9 +49,12 @@ public class TimelineDetailFragment extends Fragment {
         details = (TextView) inflater.inflate(R.layout.timeline_detail, container, false);
 
         if (null == state) { state = getActivity().getIntent().getExtras(); }
+        if (null == state) { state = getArguments(); }
+
         status = "";
         if (null != state) { status = state.getString(TimelineDetailActivity.TIMELINE_STATUS); }
         details.setText(status);
+        Log.d(TAG, "in Detatil Fragment with: " + status);
 
         return details;
     }

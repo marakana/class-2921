@@ -91,8 +91,6 @@ implements LoaderManager.LoaderCallbacks<Cursor>
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle state) {
         View v = super.onCreateView(inflater, parent, state);
 
-        v.setBackgroundResource(R.drawable.bg);
-
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(
                 getActivity(),
                 R.layout.timeline_row,
