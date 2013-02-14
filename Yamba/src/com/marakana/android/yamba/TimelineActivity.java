@@ -7,6 +7,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -39,17 +40,6 @@ public class TimelineActivity extends ListActivity
         R.id.timeline_status
     };
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(
-                this,
-                YambaContract.Timeline.URI,
-                PROJ,
-                null,
-                null,
-                SORT);
-    }
-
     class TimelineBinder implements SimpleCursorAdapter.ViewBinder {
         @Override
         public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
@@ -65,13 +55,27 @@ public class TimelineActivity extends ListActivity
         }
     }
 
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(
+                this,
+                YambaContract.Timeline.URI,
+                PROJ,
+                null,
+                null,
+                SORT);
+    }
+
     @Override
     public void onLoadFinished(Loader<Cursor> arg0, Cursor cur) {
+        Log.d(TAG, "Load finished");
         ((SimpleCursorAdapter) getListAdapter()).swapCursor(cur);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> arg0) {
+        Log.d(TAG, "Load reset");
         ((SimpleCursorAdapter) getListAdapter()).swapCursor(null);
     }
 
