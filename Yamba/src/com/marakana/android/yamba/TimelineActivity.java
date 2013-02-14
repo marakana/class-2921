@@ -1,11 +1,10 @@
 package com.marakana.android.yamba;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
 
-public class TimelineActivity extends Activity {
+public class TimelineActivity extends BaseActivity {
     private static final String TAG = "A_STATUS";
 
     @Override

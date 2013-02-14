@@ -9,5 +9,10 @@
     <string name="submit">Submit</string>
     <string name="success">Succeeded!!</string>
     <string name="failure">Post failed!!</string>
+
+    
+    <string name="menu_status">Status</string>
+    <string name="menu_timeline">Timeline</string>
+    <string name="menu_about">About</string>
     
 </resources>

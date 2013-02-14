@@ -1,11 +1,10 @@
 package com.marakana.android.yamba;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
 
-public class StatusActivity extends Activity {
+public class StatusActivity extends BaseActivity {
     private static final String TAG = "A_STATUS";
 
     @Override
