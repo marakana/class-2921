@@ -1,9 +1,11 @@
 package com.marakana.android.yamba.svc;
 
-
 import java.util.List;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.marakana.android.yamba.clientlib.YambaClient;
@@ -13,7 +15,10 @@ import com.marakana.android.yamba.clientlib.YambaClientException;
 /**
  * YambaApplication
  */
-public class YambaApplication extends Application {
+public class YambaApplication
+    extends Application
+    implements SharedPreferences.OnSharedPreferenceChangeListener
+{
     private static final String TAG = "APP";
 
     public static final String DEFAULT_USER = "student";
@@ -38,6 +43,10 @@ public class YambaApplication extends Application {
        }
     }
 
+
+    private String keyUser;
+    private String keyPasswd;
+    private String keyEndpoint;
     private SafeYambaClient client;
 
     /**
@@ -48,38 +57,33 @@ public class YambaApplication extends Application {
         super.onCreate();
         if (BuildConfig.DEBUG) { Log.d(TAG, "Application up!"); }
 
-// !!! THIS WON'T WORK!
-// The prefchangelistener is registered with a soft reference.
-//        PreferenceManager.getDefaultSharedPreferences(this)
-//            .registerOnSharedPreferenceChangeListener(
-//                    new SharedPreferences.OnSharedPreferenceChangeListener() {
-//
-//                        @Override
-//                        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-//                                String key) {
-//                            // TODO Auto-generated method stub
-//
-//                        }
-//
-//                    });
+        Resources rez = getResources();
+        keyUser = rez.getString(R.string.prefs_key_user);
+        keyPasswd = rez.getString(R.string.prefs_key_pwd);
+        keyEndpoint = rez.getString(R.string.prefs_key_endpoint);
+
+        // Don't use an anonymous class to handle this event!
+        // http://stackoverflow.com/questions/3799038/onsharedpreferencechanged-not-fired-if-change-occurs-in-separate-activity
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .registerOnSharedPreferenceChangeListener(this);
     }
 
-    /**
-     * Don't use an anonymous class to handle this event!
-     * http://stackoverflow.com/questions/3799038/onsharedpreferencechanged-not-fired-if-change-occurs-in-separate-activity
     @Override
-    public synchronized void onSharedPreferenceChanged(SharedPreferences key, String val) { }
-    */
+    public synchronized void onSharedPreferenceChanged(SharedPreferences key, String val) {
+        if (BuildConfig.DEBUG) { Log.d(TAG, "prefs changed"); }
+        client = null;
+    }
 
     public synchronized SafeYambaClient getClient() {
         if (null == client) {
-            client = new SafeYambaClient(DEFAULT_USER, DEFAULT_PASSWORD, DEFAULT_API_ROOT);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String user = prefs.getString(keyUser, DEFAULT_USER);
+            String passwd = prefs.getString(keyPasswd, DEFAULT_PASSWORD);
+            String endpoint = prefs.getString(keyEndpoint, DEFAULT_API_ROOT);
+
+            client = new SafeYambaClient(user, passwd, endpoint);
             if (BuildConfig.DEBUG) {
-                Log.d(
-                    TAG,
-                    "new client: " + DEFAULT_USER
-                        + ", " + DEFAULT_PASSWORD
-                        + ", " + DEFAULT_API_ROOT);
+                Log.d(TAG, "new client: " + user + ", " + passwd  + ", " + endpoint);
             }
         }
         return client;

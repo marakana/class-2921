@@ -27,6 +27,15 @@
         android:icon="@drawable/ic_yamba"
         android:label="@string/yamba_service"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name=".PrefsActivity"
+            android:label="@string/yamba_service" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <provider
             android:name=".data.YambaProvider"
             android:authorities="com.marakana.yamba.content"

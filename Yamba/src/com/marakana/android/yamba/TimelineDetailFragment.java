@@ -67,6 +67,7 @@ public class TimelineDetailFragment extends Fragment {
 
     //  !!! Cast will fail for the TimelineDetailActivity
     // Define an interface implemented by all owning activites to fix.
+    @SuppressWarnings("unused")
     private void sendToTimeline(String message) {
         ((TimelineActivity) getActivity()).sendMessageToTimelineFragment(message);
     }

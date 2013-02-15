@@ -117,6 +117,7 @@ implements LoaderManager.LoaderCallbacks<Cursor>
         startActivity(i);
     }
 
+    @SuppressWarnings("unused")
     public void onMessage(String message) {
         // TODO do something with the message
     }

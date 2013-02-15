@@ -30,7 +30,8 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Poller.startPolling(context);
-        Log.d("BOOT", "start polling");
+        // !! could start polling here...
+        // Poller.startPolling(context);
+        Log.d("BOOT", "boot!");
     }
 }
