@@ -47,6 +47,21 @@ public class YambaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         if (BuildConfig.DEBUG) { Log.d(TAG, "Application up!"); }
+
+// !!! THIS WON'T WORK!
+// The prefchangelistener is registered with a soft reference.
+//        PreferenceManager.getDefaultSharedPreferences(this)
+//            .registerOnSharedPreferenceChangeListener(
+//                    new SharedPreferences.OnSharedPreferenceChangeListener() {
+//
+//                        @Override
+//                        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+//                                String key) {
+//                            // TODO Auto-generated method stub
+//
+//                        }
+//
+//                    });
     }
 
     /**

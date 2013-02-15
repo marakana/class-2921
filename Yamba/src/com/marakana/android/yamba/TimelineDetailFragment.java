@@ -64,4 +64,10 @@ public class TimelineDetailFragment extends Fragment {
         super.onSaveInstanceState(state);
         state.putString(TimelineDetailActivity.TIMELINE_STATUS, status);
     }
+
+    //  !!! Cast will fail for the TimelineDetailActivity
+    // Define an interface implemented by all owning activites to fix.
+    private void sendToTimeline(String message) {
+        ((TimelineActivity) getActivity()).sendMessageToTimelineFragment(message);
+    }
 }

@@ -116,4 +116,8 @@ implements LoaderManager.LoaderCallbacks<Cursor>
         i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(i);
     }
+
+    public void onMessage(String message) {
+        // TODO do something with the message
+    }
 }

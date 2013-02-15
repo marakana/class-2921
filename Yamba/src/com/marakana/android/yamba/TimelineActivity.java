@@ -83,4 +83,9 @@ public class TimelineActivity extends BaseActivity {
         xact.replace(R.id.timeline_detail_fragment, frag, DETAIL_FRAGMENT);
         xact.commit();
     }
+
+    public void sendMessageToTimelineFragment(String message) {
+        TimelineFragment frag = (TimelineFragment) getFragmentManager().findFragmentById(R.id.timeline_fragment);
+        frag.onMessage(message);
+    }
 }
