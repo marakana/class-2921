@@ -69,6 +69,8 @@ public final class YambaContract {
 
     /** */
     public static final class Posts {
+        private Posts() {}
+
         /** Our table */
         public static final String TABLE = "Posts";
 
@@ -100,6 +102,8 @@ public final class YambaContract {
 
     /** */
     public static final class Timeline {
+        private Timeline() {}
+
         /** Our table */
         public static final String TABLE = "timeline";
 
