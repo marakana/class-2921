@@ -15,7 +15,7 @@
 */
 package com.marakana.android.yamba;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.graphics.Color;
@@ -71,9 +71,6 @@ public class StatusFragment extends Fragment {
 
         @Override
         protected void onCancelled() { poster = null; }
-
-        @Override
-        protected void onCancelled(Void result) { poster = null; }
 
         @Override
         protected void onPostExecute(Void result) { poster = null; }

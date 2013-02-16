@@ -15,7 +15,7 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme" />
 
-    <style name="yamba_base" parent="android:Widget.Holo.Light.TextView">
+    <style name="yamba_base" parent="AppTheme">
         <item name="android:textColor">@android:color/white</item>
     </style>
  

@@ -1,9 +1,10 @@
 package com.marakana.android.yamba;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -34,7 +35,7 @@ public class TimelineActivity extends BaseActivity {
         usingFragments = (null != findViewById(R.id.timeline_detail_fragment));
 
         if (usingFragments) {
-            if (null == getFragmentManager().findFragmentByTag(DETAIL_FRAGMENT)) {
+            if (null == getSupportFragmentManager().findFragmentByTag(DETAIL_FRAGMENT)) {
                 addFragment(state);
             }
         }
@@ -59,12 +60,15 @@ public class TimelineActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if ((android.R.id.home == id) || (R.id.menu_timeline == id)) { return true; }
+        if (Build.VERSION_CODES.ICE_CREAM_SANDWICH <= Build.VERSION.SDK_INT) {
+            if (android.R.id.home == id) { return true; }
+        }
+        if (R.id.menu_timeline == id) { return true; }
         return super.onOptionsItemSelected(item);
     }
 
     private void addFragment(Bundle state) {
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction xact = fragmentManager.beginTransaction();
 
         Fragment frag = TimelineDetailFragment.newInstance(state);
@@ -74,7 +78,7 @@ public class TimelineActivity extends BaseActivity {
     }
 
     private void launchDetailFragment(Intent intent) {
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction xact = fragmentManager.beginTransaction();
 
         Fragment frag = TimelineDetailFragment.newInstance(intent.getExtras());
@@ -85,7 +89,7 @@ public class TimelineActivity extends BaseActivity {
     }
 
     public void sendMessageToTimelineFragment(String message) {
-        TimelineFragment frag = (TimelineFragment) getFragmentManager().findFragmentById(R.id.timeline_fragment);
+        TimelineFragment frag = (TimelineFragment) getSupportFragmentManager().findFragmentById(R.id.timeline_fragment);
         frag.onMessage(message);
     }
 }
